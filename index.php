@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/functions.php');
 require_once(__DIR__ . '/Todo.php');
@@ -21,7 +23,7 @@ $todos = $todoApp->getAll();
 <body>
 	<div id="container">
 		<h1>Todos</h1>
-		<form action="">
+		<form action="" id="new_todo_form">
 			<input type="text" id="new_todo" placeholder="What needs to be done?">
 		</form>
 		<ul id="todos">
@@ -32,8 +34,14 @@ $todos = $todoApp->getAll();
 				<div class="delete_todo">x</div>
 			</li>
 			<?php endforeach; ?>
+			<li id="todo_template" date-id="">
+				<input type="checkbox" class="update_todo">
+				<span class="todo_title"></span>
+				<div class="delete_todo">x</div>
+			</li>
 		</ul>
 	</div>
+	<input type="hidden" id="token" value="<?= h($_SESSION['token']); ?>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="todo.js"></script>
 </body>
